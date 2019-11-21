@@ -2,10 +2,8 @@ package springbootlearingempcrud.boot.customConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springbootlearingempcrud.boot.customBeans.CustomLocalResolver;
@@ -33,7 +31,7 @@ public class CustomConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //浏览器访问项目根路径(localhost:8080/)，经视图解析器解析，映射到templates/login.html页面
-        registry.addViewController("/").setViewName("/login");
+        registry.addViewController("/").setViewName("/loginPage");
         registry.addViewController("/main.html").setViewName("dashboard");
     }
 
@@ -65,6 +63,7 @@ public class CustomConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginStatusInterceptor())
                 //拦截所有请求，不包括{"/","/index.html","/login"}
-                .addPathPatterns("/**").excludePathPatterns("/","/index.html","/login_submit","/webjars/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/","/index.html","/login","/webjars/**");
     }
 }

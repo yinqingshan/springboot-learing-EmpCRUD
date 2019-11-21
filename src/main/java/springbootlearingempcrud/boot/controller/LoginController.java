@@ -23,7 +23,7 @@ public class LoginController {
 
         if (!account.getUserName().equals("admin") || !account.getPassword().equals("123456")) {
             model.addAttribute("errMsg", "账户或密码不正确!");
-            return "/login";
+            return "/loginPage";
         }
         model.addAttribute("userName", account.getUserName());
         return "redirect:/main.html";

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>修改员工信息</title>
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<!--引入公共片段topbar-->
+<div th:replace="~{fragment::topbar}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <!--引入公共片段sidebar-->
+        <div th:replace="fragment::sidebar(activeUri='main.html')"></div>
+
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <!--切记！当使用restful风格时，emp代表多种请求，需要在action中手写，且选择一下-->
+            <form action="/emp" method="post">
+                <input type="hidden" name="id" th:value="${employee.id}">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <!--name="lastName"为提交到后台的形参名、提交的值是value，即输入框的内容-->
+                    <input type="text" class="form-control" placeholder="张三" name="lastName"
+                           th:value="${employee.lastName}">
+                </div>
+                <br>
+
+                <div class="form‐group">
+                    <label>性别</label><br/>
+                    <div class="form‐check form‐check‐inline">
+                        <!--name="gender"为提交到后台的形参名、提交的值是value='1'或'0'，即选中radio对应的value-->
+                        <input class="form‐check‐input" type="radio" name="gender" value="1"
+                               th:checked="${employee.gender}==1?'true':'false'">
+                        <label class="form‐check‐label">男</label>
+                        <input class="form‐check‐input" type="radio" name="gender" value="0"
+                               th:checked="${employee.gender}==0?'true':'false'">
+                        <label class="form‐check‐label">女</label>
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label>生日</label>
+                    <input type="text" class="form-control" placeholder="2000/12/12" name="birth"
+                           th:value="${#dates.format(employee.birth, 'yyyy-MM-dd HH:mm')}">
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label>所属部门</label>
+                    <select multiple class="form-control" name="department.id">
+                        <!--selected的值为true则选中-->
+                        <option th:each="department:${departments}"
+                                th:text="${department.departmentName}"
+                                th:value="${department.id}"
+                                th:selected="${department.id}==${employee.department.id}">
+                        </option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label>我的邮箱</label>
+                    <input type="text" class="form-control" placeholder="name@example.com" name="email"
+                           th:value="${employee.email}">
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <input type="hidden" name="_method" value="put"/>
+                    <input type="submit" class="btn btn-primary" value="提交">
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+</body>
+</html>
