@@ -65,6 +65,7 @@ public class EmpController {
         return "redirect:/emps";
     }
 
+    //chrome浏览器始终无法实现Delete请求，亲测postman可以成功。故删除功能没实现restful
     @RequestMapping(value = "/empDel/{id}")
     public String delete(@PathVariable("id") Integer id) {
         employeeDao.delete(id);
