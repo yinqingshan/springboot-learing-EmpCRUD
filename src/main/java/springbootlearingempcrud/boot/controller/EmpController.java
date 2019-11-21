@@ -44,7 +44,6 @@ public class EmpController {
     @PostMapping("/emp")
     public String add(Employee employee) {
         employeeDao.save(employee);
-        System.out.println(employee);
         return "redirect:/emps";
     }
 
@@ -68,9 +67,7 @@ public class EmpController {
 
     @RequestMapping(value = "/empDel/{id}")
     public String delete(@PathVariable("id") Integer id) {
-        System.out.println(id);
         employeeDao.delete(id);
         return "redirect:/emps";
     }
-
 }
