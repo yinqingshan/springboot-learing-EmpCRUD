@@ -64,6 +64,6 @@ public class CustomConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new LoginStatusInterceptor())
                 //拦截所有请求，不包括{"/","/index.html","/login"}
                 .addPathPatterns("/**")
-                .excludePathPatterns("/","/index.html","/login","/webjars/**");
+                .excludePathPatterns("/","/index.html","/login","/webjars/**","/asserts/**");
     }
 }

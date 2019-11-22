@@ -43,6 +43,7 @@ public class EmpController {
 
     @PostMapping("/emp")
     public String add(Employee employee) {
+        System.out.println(employee);
         employeeDao.save(employee);
         return "redirect:/emps";
     }

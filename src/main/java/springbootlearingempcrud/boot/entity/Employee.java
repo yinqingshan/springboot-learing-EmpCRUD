@@ -13,7 +13,7 @@ public class Employee {
     //1 male, 0 female
     private Integer gender;
     private Department department;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
 
     public Integer getId() {
